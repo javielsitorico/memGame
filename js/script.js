@@ -21,17 +21,38 @@ function revelar(carta) {
 }
 
 function comprobarParejas() {
+     let parejaEncontrada = false;
      for (let pareja in parejas) {
           if (parejas[pareja].sort().join(',') == parejaActual.sort().join(',')) {
-               parejas.splice(pareja, 1)
+               parejas.splice(pareja, 1);
+               parejaEncontrada = true;
+               break;
           }
      }
-     parejaActual = [];
-     // console.log(parejas);
-     console.log(parejas);
-     if(parejas.length == 0) {
-          console.log('ganaste');
+
+     if(!parejaEncontrada) {
+          parejaIncorrecta();
+          console.log('nepe');
      }
+
+     parejaActual = [];
+
+     if(parejas.length == 0) {
+          // Victoria
+     }
+}
+
+function parejaIncorrecta() {
+     let parejaVoltear = parejaActual;
+     setTimeout(() => {
+          for (let carta of parejaVoltear) {
+               $('#'+carta).toggleClass('carta-contenedor-volteado');
+               setTimeout(() => {
+                    $('#'+carta).effect('shake', {times: 2, distance: 5}, 200);
+               }, 800);
+          }
+     }, 800);
+     
 }
 
 // elemento.effect( "shake" ); --> Efecto para cuando falle al adivinar
