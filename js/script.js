@@ -51,6 +51,10 @@ function comprobarParejas() {
 
      parejaActual = [];
 
+     comprobarVictoria();
+}
+
+function comprobarVictoria() {
      if(parejas.length == 0) {
           $('#modal-victoria').css("display","block")
      }
