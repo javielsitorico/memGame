@@ -6,12 +6,6 @@ let parejas = [
      ['balon-1', 'balon-2'],
 ]
 
-for(let carta of $('.carta-contenedor')) {
-     $(carta).bind('click', function() {
-          revelar($(this));
-     });
-}
-
 function revelar(carta) {
      if(!carta.hasClass('carta-contenedor-volteado')) {
           carta.toggleClass('carta-contenedor-volteado');
@@ -38,7 +32,7 @@ function comprobarParejas() {
      parejaActual = [];
 
      if(parejas.length == 0) {
-          // Victoria
+          $('#modal-victoria').css("display","block")
      }
 }
 
@@ -55,4 +49,28 @@ function parejaIncorrecta() {
      
 }
 
-// elemento.effect( "shake" ); --> Efecto para cuando falle al adivinar
+function reiniciarJuego() {
+     for(let carta of $('.carta-contenedor')) {
+          if($(carta).hasClass('carta-contenedor-volteado')) {
+               $(carta).toggleClass('carta-contenedor-volteado');
+          }
+     }
+     setTimeout(() => $('#modal-victoria').fadeOut(), 800)
+     parejaActual = []
+     parejasConseguidas = 0;
+     parejas = [
+          ['rayo-1', 'rayo-2'],
+          ['avion-1', 'avion-2'],
+          ['balon-1', 'balon-2'],
+     ]
+}
+
+for(let carta of $('.carta-contenedor')) {
+     $(carta).bind('click', function() {
+          revelar($(this));
+     });
+}
+
+$('#boton-cerrar-modal').click(() => $('#modal-victoria').css("display","none"));
+
+$('#boton-jugar-de-nuevo').bind('click', reiniciarJuego);
