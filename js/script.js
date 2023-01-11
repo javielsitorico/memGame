@@ -1,3 +1,5 @@
+let cartas = [];
+let cartasReordenadas = [];
 let parejaActual = []
 let parejasConseguidas = 0;
 let parejas = [
@@ -5,6 +7,25 @@ let parejas = [
      ['avion-1', 'avion-2'],
      ['balon-1', 'balon-2'],
 ]
+
+function reordenarCartas() {
+     $('.tablero').children().each(function() {
+          cartas.push($(this));
+          $(this).remove();
+     });
+     cartasReordenadas = cartas.sort((a, b) => 0.5 - Math.random());
+     console.log(cartasReordenadas);
+     $('.tablero').append(cartas);
+     asociarRevelar();
+}
+
+function asociarRevelar() {
+     for(let carta of $('.carta-contenedor')) {
+          $(carta).bind('click', function() {
+               revelar($(this));
+          });
+     }
+}
 
 function revelar(carta) {
      if(!carta.hasClass('carta-contenedor-volteado')) {
@@ -26,7 +47,6 @@ function comprobarParejas() {
 
      if(!parejaEncontrada) {
           parejaIncorrecta();
-          console.log('nepe');
      }
 
      parejaActual = [];
@@ -55,7 +75,10 @@ function reiniciarJuego() {
                $(carta).toggleClass('carta-contenedor-volteado');
           }
      }
-     setTimeout(() => $('#modal-victoria').fadeOut(), 800)
+     setTimeout(() => {
+          $('#modal-victoria').fadeOut()
+          reordenarCartas();
+     }, 800)
      parejaActual = []
      parejasConseguidas = 0;
      parejas = [
@@ -63,13 +86,10 @@ function reiniciarJuego() {
           ['avion-1', 'avion-2'],
           ['balon-1', 'balon-2'],
      ]
+     
 }
 
-for(let carta of $('.carta-contenedor')) {
-     $(carta).bind('click', function() {
-          revelar($(this));
-     });
-}
+reordenarCartas();
 
 $('#boton-cerrar-modal').click(() => $('#modal-victoria').css("display","none"));
 
