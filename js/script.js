@@ -14,7 +14,6 @@ function reordenarCartas() {
           $(this).remove();
      });
      cartasReordenadas = cartas.sort((a, b) => 0.5 - Math.random());
-     console.log(cartasReordenadas);
      $('.tablero').append(cartas);
      asociarRevelar();
 }
@@ -56,7 +55,13 @@ function comprobarParejas() {
 
 function comprobarVictoria() {
      if(parejas.length == 0) {
-          $('#modal-victoria').css("display","block")
+          setTimeout(() => {
+               $('.tablero').effect( "bounce", { times: 5, distance: 40}, 700 );
+               setTimeout(() => {
+                    $('#modal-victoria').fadeIn();
+               }, 1200);
+          }, 800);
+          
      }
 }
 

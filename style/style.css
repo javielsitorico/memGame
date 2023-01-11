@@ -70,6 +70,28 @@ h1 {
     background-color: #E9E9E9;
 }
 
+/* .carta-frontal {
+    animation: fondo-animado linear alternate infinite 4s;
+}
+
+@keyframes fondo-animado {
+    0% {
+        background-color: #159ee9;
+    }
+    25% {
+        background-color: #4bce3a;
+    }
+    50% {
+        background-color: #e6ca30;
+    }
+    75% {       
+        background-color: #e99f15;
+    }
+    100%{
+        background-color: #eb3333;
+    }
+} */
+
 .carta-trasera {
     transform: rotateY(180deg);
 }
