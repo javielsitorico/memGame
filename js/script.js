@@ -80,6 +80,7 @@ function parejaIncorrecta() {
 
 function comprobarDerrota() {
      if (vidas == -1) {
+          $('.cabecera').animate({opacity: 0}, 800);
           derrotas ++;
           setTimeout(() => {
                $('.tablero').toggle("drop");
@@ -92,6 +93,7 @@ function comprobarDerrota() {
 
 function comprobarVictoria() {
      if(parejas.length == 0) {
+          $('.cabecera').animate({opacity: 0}, 800);
           victorias++;
           victoria = true;
           setTimeout(() => {
@@ -104,6 +106,8 @@ function comprobarVictoria() {
 }
 
 function reiniciarJuego() {
+
+     $('.cabecera').animate({opacity: 1}, 800);
 
      console.log(victoria);
      console.log(victorias);
