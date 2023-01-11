@@ -19,7 +19,14 @@
 
 <body>
     <main>
-        <h1>Memory Game</h1>
+        <div class="cabecera">
+            <h1>Memory Game</h1>
+            <div class="marcador">
+                <p>Vidas: <span id="vidas"></span></p>
+                <p><span id="victorias"></span> - <span id="derrotas"></span></p>
+            </div>
+        </div>
+        
 
         <div class="tablero">
 
@@ -184,7 +191,19 @@
             <!-- <span class="boton-cerrar-modal" id="boton-cerrar-modal">&times;</span> -->
             <div class="contenedor-modal">
                 <h2 class="titulo-modal">¡Has ganado!</h2>
-                <button class="boton" id="boton-jugar-de-nuevo">Jugar de nuevo</button>
+                <button class="boton-jugar-de-nuevo">Jugar de nuevo</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modal-derrota" class="modal">
+
+        <div class="contenido-modal">
+            <!-- <span class="boton-cerrar-modal" id="boton-cerrar-modal">&times;</span> -->
+            <div class="contenedor-modal">
+                <h2 class="titulo-modal">Has perdido :(</h2>
+                <button class="boton-jugar-de-nuevo">Jugar de nuevo</button>
             </div>
         </div>
 

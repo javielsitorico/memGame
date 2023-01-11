@@ -1,5 +1,9 @@
 let cartas = [];
 let cartasReordenadas = [];
+let vidas = 3;
+let victoria = false;
+let victorias = 0;
+let derrotas = 0;
 let parejaActual = []
 let parejasConseguidas = 0;
 let parejas = [
@@ -26,8 +30,14 @@ function asociarRevelar() {
      }
 }
 
+function actualizarMarcador() {
+     $('#victorias').text(victorias);
+     $('#derrotas').text(derrotas);
+     if (vidas >= 0) $('#vidas').text(vidas);
+}
+
 function revelar(carta) {
-     if(!carta.hasClass('carta-contenedor-volteado')) {
+     if(!carta.hasClass('carta-contenedor-volteado') && vidas >= 0) {
           carta.toggleClass('carta-contenedor-volteado');
           parejaActual.push(carta.attr('id'));
           if(parejaActual.length == 2) comprobarParejas();
@@ -46,23 +56,11 @@ function comprobarParejas() {
 
      if(!parejaEncontrada) {
           parejaIncorrecta();
+     } else {
+          comprobarVictoria();
      }
 
      parejaActual = [];
-
-     comprobarVictoria();
-}
-
-function comprobarVictoria() {
-     if(parejas.length == 0) {
-          setTimeout(() => {
-               $('.tablero').effect( "bounce", { times: 5, distance: 40}, 700 );
-               setTimeout(() => {
-                    $('#modal-victoria').fadeIn();
-               }, 1200);
-          }, 800);
-          
-     }
 }
 
 function parejaIncorrecta() {
@@ -75,19 +73,61 @@ function parejaIncorrecta() {
                }, 800);
           }
      }, 800);
-     
+     vidas--;
+     comprobarDerrota();
+     actualizarMarcador();
+}
+
+function comprobarDerrota() {
+     if (vidas == -1) {
+          derrotas ++;
+          setTimeout(() => {
+               $('.tablero').toggle("drop");
+               setTimeout(() => {
+                    $('#modal-derrota').fadeIn();
+               }, 500);
+          }, 1600);
+     }
+}
+
+function comprobarVictoria() {
+     if(parejas.length == 0) {
+          victorias++;
+          victoria = true;
+          setTimeout(() => {
+               $('.tablero').effect( "bounce", { times: 5, distance: 40}, 700 );
+               setTimeout(() => {
+                    $('#modal-victoria').fadeIn();
+               }, 1200);
+          }, 800);
+     }
 }
 
 function reiniciarJuego() {
+
+     console.log(victoria);
+     console.log(victorias);
+
      for(let carta of $('.carta-contenedor')) {
           if($(carta).hasClass('carta-contenedor-volteado')) {
                $(carta).toggleClass('carta-contenedor-volteado');
           }
      }
+
      setTimeout(() => {
-          $('#modal-victoria').fadeOut()
+          if(victoria) {
+               $('#modal-victoria').fadeOut();
+               victoria = false;
+          } else {
+               $('#modal-derrota').fadeOut();
+               $('.tablero').toggle( "drop");
+          }
           reordenarCartas();
-     }, 800)
+     }, 500)
+     
+     vidas = 3;
+     actualizarMarcador();
+
      parejaActual = []
      parejasConseguidas = 0;
      parejas = [
@@ -99,7 +139,8 @@ function reiniciarJuego() {
 }
 
 reordenarCartas();
+actualizarMarcador();
 
 // $('#boton-cerrar-modal').click(() => $('#modal-victoria').css("display","none"));
 
-$('#boton-jugar-de-nuevo').bind('click', reiniciarJuego);
+$('.boton-jugar-de-nuevo').bind('click', reiniciarJuego);

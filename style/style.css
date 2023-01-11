@@ -12,12 +12,41 @@ main {
     gap: 30px;
 }
 
+.cabecera {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10%;
+}
+
 h1 {
     text-align: center;
     font-size: 52px;
     font-weight: 800;
     font-style: italic;
     color: #151515;
+
+    flex: 1;
+}
+
+.marcador {
+    min-width: 10%;
+    margin: 20px;
+}
+
+.marcador p, .marcador p * {
+    color: #151515;
+    font-weight: 800;
+    font-size: 24px;
+    margin: 0;
+}
+
+.marcador p #victorias {
+    color: #29ee29;
+}
+.marcador p #derrotas {
+    color: #ee2929;
 }
 
 .tablero {
@@ -160,7 +189,7 @@ h1 {
     }
 }
 
-.boton {
+.boton-jugar-de-nuevo {
     padding: 15px;
     background-color: #159ee9;
     color: #F1F1F1;
@@ -171,6 +200,6 @@ h1 {
     cursor: pointer;
 }
 
-.boton:hover {
+.boton-jugar-de-nuevo:hover {
     background-color: #187fb6;
 }
