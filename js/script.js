@@ -91,6 +91,6 @@ function reiniciarJuego() {
 
 reordenarCartas();
 
-$('#boton-cerrar-modal').click(() => $('#modal-victoria').css("display","none"));
+// $('#boton-cerrar-modal').click(() => $('#modal-victoria').css("display","none"));
 
 $('#boton-jugar-de-nuevo').bind('click', reiniciarJuego);
